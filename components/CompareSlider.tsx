@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Icon } from "./svg/Icon";
 
 type Side = { src: string; alt: string; label: string };
 
@@ -114,9 +115,7 @@ export function CompareSlider({
           }}
         >
           <span aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M7 6 2 11l5 5M15 6l5 5-5 5" />
-            </svg>
+            <Icon name="compare" size={22} />
           </span>
         </div>
       </div>

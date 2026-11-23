@@ -1,5 +1,5 @@
 import { Crumbs, Eyebrow, ContactCTA, Action } from "@/components/Shared";
-import { ServiceDrawing } from "@/components/Graphics";
+import { ServiceDrawing } from "@/components/svg/ServiceDrawing";
 import { services } from "@/content/studio";
 import { metadata as pageMeta } from "@/lib/site";
 export const metadata = pageMeta(

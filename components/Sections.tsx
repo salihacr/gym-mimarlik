@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/content/model";
 import { services, studio } from "@/content/studio";
-import { Icon, ServiceDrawing } from "./Graphics";
+import { Icon } from "./svg/Icon";
+import { PavilionDrawing } from "./svg/Pavilion";
+import { PlanDrawing } from "./svg/PlanDrawing";
+import { ServiceDrawing } from "./svg/ServiceDrawing";
 import { Action, Eyebrow } from "./Shared";
 import { ProjectCard } from "./ProjectCard";
 import { CompareSlider } from "./CompareSlider";
@@ -60,12 +63,7 @@ export function SelectedProjects({
           </ul>
         ) : (
           <div className="feature-empty">
-            <Image
-              src="/drawings/plan.svg"
-              alt="Kapı açılımları, mobilya yerleşimi ve ölçü çizgilerini gösteren şematik kat planı"
-              fill
-              sizes="(max-width: 900px) 100vw, 75vw"
-            />
+            <PlanDrawing fit="contain" />
           </div>
         )}
       </div>
@@ -80,12 +78,16 @@ function FeatureCard({ project, lead }: { project: Project; lead: boolean }) {
   return (
     <Link href={"/projeler/" + project.slug} className="feature-card">
       <figure>
-        <Image
-          src={project.cover?.src ?? "/drawings/pavilion.svg"}
-          alt={project.cover?.alt ?? ""}
-          fill
-          sizes={lead ? "(max-width: 900px) 100vw, 60vw" : "(max-width: 900px) 100vw, 40vw"}
-        />
+        {project.cover ? (
+          <Image
+            src={project.cover.src}
+            alt={project.cover.alt}
+            fill
+            sizes={lead ? "(max-width: 900px) 100vw, 60vw" : "(max-width: 900px) 100vw, 40vw"}
+          />
+        ) : (
+          <PavilionDrawing />
+        )}
         {project.publication === "demo" && (
           <span className="demo-tag">Temsilî çalışma · Demo</span>
         )}

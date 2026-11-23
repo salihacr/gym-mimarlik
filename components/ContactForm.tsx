@@ -2,7 +2,7 @@
 import { useState, useSyncExternalStore, type FormEvent } from "react";
 import { services } from "@/content/studio";
 import { parseInquiry } from "@/lib/inquiry";
-import { Icon } from "./Graphics";
+import { Icon } from "./svg/Icon";
 const subscribe = () => () => {};
 const onClient = () => true;
 const onServer = () => false;

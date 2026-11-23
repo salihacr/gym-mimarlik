@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/content/model";
-import { Icon } from "./Graphics";
+import { Icon } from "./svg/Icon";
 export function ProjectCard({
   project,
   heading: Heading = "h3",

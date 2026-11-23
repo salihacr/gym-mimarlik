@@ -1,9 +1,5 @@
-import Image from "next/image";
 import { Action, Eyebrow } from "./Shared";
-export const drawing = {
-  src: "/drawings/pavilion.svg",
-  alt: "Üst üste oturan hacimleri ve kat ilişkilerini gösteren aksonometrik mimari şema",
-};
+import { PlanDrawing } from "./svg/PlanDrawing";
 export { ProjectCard } from "./ProjectCard";
 export function EmptyProjects({
   heading: Heading = "h3",
@@ -13,12 +9,7 @@ export function EmptyProjects({
   return (
     <div className="empty-projects">
       <div className="empty-drawing">
-        <Image
-          src="/drawings/plan.svg"
-          alt="Kapı açılımları, mobilya yerleşimi ve ölçü çizgilerini gösteren şematik kat planı"
-          fill
-          sizes="(max-width:760px) 100vw, 50vw"
-        />
+        <PlanDrawing />
       </div>
       <div>
         <Eyebrow>PROJE ARŞİVİ</Eyebrow>

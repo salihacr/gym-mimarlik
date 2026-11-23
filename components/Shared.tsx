@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon } from "./Graphics";
+import { Icon } from "./svg/Icon";
 import { Brand } from "./Header";
 import { services, studio, stages } from "@/content/studio";
 import { approvedNotice, siteUrl } from "@/lib/site";

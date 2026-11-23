@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import type { Media } from "@/content/model";
-import { Icon } from "./Graphics";
+import { Icon } from "./svg/Icon";
 export function Gallery({ images, title }: { images: Media[]; title: string }) {
   const [index, setIndex] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/content/studio";
-import { BrandMark, Icon } from "./Graphics";
+import { BrandMark } from "./svg/BrandMark";
+import { Icon } from "./svg/Icon";
 
 export function Brand() {
   return (
