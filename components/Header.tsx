@@ -25,6 +25,23 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const header = useRef<HTMLElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    // Home page marks the end of the hero; elsewhere the top of the page is the boundary.
+    const target =
+      document.querySelector<HTMLElement>("[data-header-sentinel]") ??
+      document.querySelector<HTMLElement>("[data-header-top]");
+    if (!target) return;
+    const edge = () => header.current?.offsetHeight ?? 0;
+    const update = (top: number) => setScrolled(top <= edge());
+    update(target.getBoundingClientRect().top);
+    const observer = new IntersectionObserver(
+      ([entry]) => update(entry.boundingClientRect.top),
+      { rootMargin: `-${edge()}px 0px 0px 0px`, threshold: [0, 1] },
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [path]);
   useEffect(() => {
     if (!open) return;
     function close(e: KeyboardEvent) {
@@ -44,8 +61,11 @@ export function Header() {
     };
   }, [open]);
   return (
+    <>
+    <div data-header-top aria-hidden="true" className="header-top" />
     <header
       className="header"
+      data-scrolled={scrolled || open ? "true" : "false"}
       ref={header}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
@@ -89,5 +109,6 @@ export function Header() {
         </Link>
       </div>
     </header>
+    </>
   );
 }

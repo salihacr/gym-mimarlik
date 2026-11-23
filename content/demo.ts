@@ -57,4 +57,49 @@ export const demoProjects: Project[] = [
       alt: "Avluya bakan geniş pencereleri ve tuğla cephe elemanlarıyla bir ofis yapısı örneği",
     },
   },
+  {
+    slug: "mustakil-konut",
+    title: "Müstakil konut",
+    category: "Konut",
+    publication: "demo",
+    summary:
+      "Tek ailenin kullanacağı müstakil bir evde giriş, mutfak ve oturma alanı günlük düzeni belirler.",
+    approach:
+      "Arsanın güneş alan tarafını ve komşu yapılara bakan cepheleri birlikte değerlendiririz. Mutfak ile oturma alanının ilişkisi, yatak odalarının sessiz tarafa yerleşimi ve giriş holünün sadeliği plan üzerinde netleşir.",
+    cover: {
+      src: "/demo/interior.webp",
+      caption: "Müstakil konut",
+      alt: "Açık planlı oturma ve yemek alanını gösteren temsilî iç mekân görseli",
+    },
+  },
+  {
+    slug: "konut-kompleksi",
+    title: "Konut kompleksi giriş bloğu",
+    category: "Konut",
+    publication: "demo",
+    summary:
+      "Birden fazla blok içeren bir sitede ortak girişlerin, yaya dolaşımının ve otoparkın birlikte düşünülmesi gerekir.",
+    approach:
+      "Yaya ile araç dolaşımını ayırmak, blok girişlerini ortak bahçeden okunur hâle getirmek ve her dairenin ışık aldığı cepheleri kontrol etmek planın ana kararlarıdır. Giriş bloğunun ölçekli çizimleri bu kararları netleştirir.",
+    cover: {
+      src: "/demo/konut.webp",
+      caption: "Konut kompleksi",
+      alt: "Birden fazla bloktan oluşan konut yapısının temsilî dış görseli",
+    },
+  },
+  {
+    slug: "ofis-kat-planlama",
+    title: "Ofis katı planlaması",
+    category: "Plaza / Ofis",
+    publication: "demo",
+    summary:
+      "Bir ofis katında çalışma masaları, toplantı odaları ve ortak alanlar kullanıcıların yürüyüş yoluna göre yerleşir.",
+    approach:
+      "Katın ana girişinden toplantı odalarına ve dinlenme alanına kadar olan yolu plan üzerinde takip ederiz. Bölünebilen alanların hangi noktalarda kapanacağı ve doğal ışığın masalara nasıl ulaşacağı, düzenin son hâlini belirler.",
+    cover: {
+      src: "/demo/facade.webp",
+      caption: "Ofis katı",
+      alt: "Geniş pencereli ofis binasının temsilî cephe görseli",
+    },
+  },
 ];

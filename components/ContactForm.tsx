@@ -86,7 +86,7 @@ export function ContactForm({
     }
   }
   return (
-    <form className="contact-form" method="post" onSubmit={submit}>
+    <form id="form" className="contact-form" method="post" onSubmit={submit}>
       <noscript>Formu kullanabilmek için JavaScript’i etkinleştirin.</noscript>
       <h2>{enabled ? "Projenizi anlatın." : "Proje özeti hazırlayın."}</h2>
       {!enabled && (
