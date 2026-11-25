@@ -21,7 +21,21 @@ export const studio: {
   experience: string;
   biography: string[];
   regions: string[];
+  contact?: { phone?: string; email?: string; whatsapp?: string; mapQuery?: string };
 } = studioData;
+
+/** Public contact details: edited in /admin (Stüdyo Bilgileri); STUDIO_* env vars still work as a fallback. */
+export function studioContact() {
+  const c = studio.contact || {};
+  const pick = (value: string | undefined, env: string | undefined) =>
+    value?.trim() || env?.trim() || undefined;
+  return {
+    phone: pick(c.phone, process.env.STUDIO_PHONE),
+    email: pick(c.email, process.env.STUDIO_EMAIL),
+    whatsapp: pick(c.whatsapp, process.env.STUDIO_WHATSAPP)?.replace(/\D/g, "") || undefined,
+    mapQuery: pick(c.mapQuery, process.env.STUDIO_MAP_QUERY),
+  };
+}
 
 export const navigation = [
   ["/", "Ana Sayfa"],

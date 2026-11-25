@@ -170,6 +170,14 @@ collections:
           - { name: experience, label: Deneyim, widget: string }
           - { name: biography, label: Biyografi paragrafları, label_singular: Paragraf, widget: list, field: { name: paragraph, label: Paragraf, widget: text } }
           - { name: regions, label: Hizmet bölgeleri, label_singular: Bölge, widget: list, field: { name: region, label: Bölge, widget: string } }
+          - name: contact
+            label: İletişim bilgileri
+            widget: object
+            fields:
+              - { name: phone, label: Telefon, widget: string, required: false, hint: "Örn. 0507 123 45 67" }
+              - { name: email, label: E-posta, widget: string, required: false }
+              - { name: whatsapp, label: WhatsApp numarası, widget: string, required: false, hint: "Ülke koduyla, örn. 905071234567" }
+              - { name: mapQuery, label: Harita konumu, widget: string, required: false, hint: "Google Haritalar'da aratılacak adres veya işletme adı; boş bırakılırsa harita gizlenir." }
       - name: surec
         label: Çalışma Süreci
         file: content/site/surec.json

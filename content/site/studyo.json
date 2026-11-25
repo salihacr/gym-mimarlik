@@ -12,5 +12,11 @@
     "Çayırova",
     "Kocaeli",
     "İstanbul"
-  ]
+  ],
+  "contact": {
+    "phone": "0531 507 41 25",
+    "email": "",
+    "whatsapp": "",
+    "mapQuery": "GYM Mimarlık & 3D Studio Darıca"
+  }
 }

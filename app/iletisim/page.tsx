@@ -5,16 +5,14 @@ import {
   contactEnabled,
   metadata as pageMeta,
 } from "@/lib/site";
-import { studio } from "@/content/studio";
+import { studio, studioContact } from "@/content/studio";
 export const metadata = pageMeta(
   "/iletisim",
   "İletişim ve Proje Görüşmesi",
   "Mimari tasarım, projelendirme veya 3D görselleştirme için ihtiyaçlarınızı ve proje konumunuzu GYM Mimarlık görüşmesine hazırlayın.",
 );
 export default function Contact() {
-  const email = process.env.STUDIO_EMAIL,
-    phone = process.env.STUDIO_PHONE,
-    whatsapp = process.env.STUDIO_WHATSAPP;
+  const { email, phone, whatsapp } = studioContact();
   return (
     <>
       <Crumbs items={[["/iletisim", "İletişim"]]} />

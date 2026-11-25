@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Icon } from "./svg/Icon";
 import { Brand } from "./Header";
-import { services, studio, stages } from "@/content/studio";
+import { services, studio, stages, studioContact } from "@/content/studio";
 import { approvedNotice, siteUrl } from "@/lib/site";
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -71,16 +71,9 @@ export function JsonLd({ value }: { value: unknown }) {
     />
   );
 }
-function contactValues() {
-  return {
-    phone: process.env.STUDIO_PHONE,
-    email: process.env.STUDIO_EMAIL,
-    whatsapp: process.env.STUDIO_WHATSAPP?.replace(/\D/g, ""),
-  };
-}
+const contactValues = studioContact;
 export function ContactCTA() {
-  const { email, whatsapp } = contactValues();
-  const mapQuery = process.env.STUDIO_MAP_QUERY;
+  const { email, whatsapp, mapQuery } = contactValues();
   const mapEmbed = mapQuery
     ? "https://www.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&output=embed"
     : undefined;
