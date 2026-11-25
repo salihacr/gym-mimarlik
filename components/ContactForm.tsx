@@ -1,8 +1,17 @@
 "use client";
-import { useState, useSyncExternalStore, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+} from "react";
+import Script from "next/script";
 import { services } from "@/content/studio";
 import { parseInquiry } from "@/lib/inquiry";
 import { Icon } from "./svg/Icon";
+// Optional Cloudflare Turnstile spam check; set the site key at build time.
+const turnstileKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const subscribe = () => () => {};
 const onClient = () => true;
 const onServer = () => false;
@@ -10,13 +19,18 @@ const onServer = () => false;
 export function ContactForm({
   enabled,
   notice,
-  initialService,
 }: {
   enabled: boolean;
   notice?: string;
-  initialService: string;
 }) {
   const ready = useSyncExternalStore(subscribe, onClient, onServer);
+  const serviceRef = useRef<HTMLSelectElement>(null);
+  // The page is static, so the ?hizmet= preselection is read in the browser.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("hizmet");
+    if (serviceRef.current && services.some((s) => s.id === wanted))
+      serviceRef.current.value = wanted!;
+  }, []);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -68,11 +82,13 @@ export function ContactForm({
           ...input,
           website: fields.website,
           noticeRead: fields.noticeRead === "on",
+          turnstileToken: fields["cf-turnstile-response"],
         }),
       });
       if (r.ok && (await r.json()).accepted === true) {
         setMessage("Proje talebiniz alındı.");
         form.reset();
+        (window as { turnstile?: { reset: () => void } }).turnstile?.reset();
       } else
         setMessage(
           r.status === 429
@@ -123,7 +139,7 @@ export function ContactForm({
         </label>
         <label>
           Hangi hizmete ihtiyacınız var?
-          <select name="service" defaultValue={initialService} required>
+          <select ref={serviceRef} name="service" defaultValue="" required>
             <option value="" disabled>
               Hizmet seçin
             </option>
@@ -162,6 +178,19 @@ export function ContactForm({
           <input name="website" autoComplete="off" tabIndex={-1} />
         </label>
       </div>
+      {enabled && turnstileKey && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="afterInteractive"
+          />
+          <div
+            className="cf-turnstile"
+            data-sitekey={turnstileKey}
+            data-language="tr"
+          />
+        </>
+      )}
       {enabled && notice && (
         <label className="check-label">
           <input type="checkbox" name="noticeRead" required />

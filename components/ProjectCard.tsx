@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/content/model";
 import { Icon } from "./svg/Icon";
+import { withBase } from "@/lib/base-path";
 export function ProjectCard({
   project,
   heading: Heading = "h3",
@@ -17,7 +18,7 @@ export function ProjectCard({
       <div className="project-photo">
         {project.cover ? (
           <Image
-            src={project.cover.src}
+            src={withBase(project.cover.src)}
             alt={project.cover.alt}
             fill
             sizes="(max-width:760px) 100vw, 56vw"

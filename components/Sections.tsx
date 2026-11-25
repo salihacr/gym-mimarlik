@@ -9,6 +9,7 @@ import { ServiceDrawing } from "./svg/ServiceDrawing";
 import { Action, Eyebrow } from "./Shared";
 import { ProjectCard } from "./ProjectCard";
 import { CompareSlider } from "./CompareSlider";
+import { withBase } from "@/lib/base-path";
 
 export function Services() {
   return (
@@ -80,7 +81,7 @@ function FeatureCard({ project, lead }: { project: Project; lead: boolean }) {
       <figure>
         {project.cover ? (
           <Image
-            src={project.cover.src}
+            src={withBase(project.cover.src)}
             alt={project.cover.alt}
             fill
             sizes={lead ? "(max-width: 900px) 100vw, 60vw" : "(max-width: 900px) 100vw, 40vw"}

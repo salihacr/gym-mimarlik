@@ -95,5 +95,7 @@ export const stages: Stage[] = [
 ];
 
 export function frameUrl(index: number, width: number) {
-  return `/hero/${stages[index].file}-${width}.webp`;
+  // Inlined (not lib/base-path) so scripts/prepare-hero.mjs can still import this file with plain Node.
+  const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
+  return `${base}/hero/${stages[index].file}-${width}.webp`;
 }

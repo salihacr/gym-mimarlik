@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "tasarim",
+      "name": "Mimari Tasarım",
+      "icon": "house",
+      "intro": "Arsanıza ve günlük yaşamınıza uygun bir yerleşim planlıyoruz.",
+      "detail": "Bir apartmanda dairelerin hangi cepheye bakacağını, bir villada salonun bahçeye nereden açılacağını plan üzerinde gösteriyoruz. Ofis projelerinde ise çalışma alanlarını, toplantı odalarını ve ziyaretçi girişini ekibinizin kullanımına göre yerleştiriyoruz.",
+      "question": "İlk görüşmeye ne getirmeliyim?",
+      "answer": "Varsa arsanızın ölçülerini, imar durumunu ve elinizdeki planları paylaşabilirsiniz. İhtiyaç duyduğunuz oda sayısını ve sizin için önemli olan birkaç konuyu not etmeniz de iyi bir başlangıç olur."
+    },
+    {
+      "id": "projelendirme",
+      "name": "Mimari Projelendirme",
+      "icon": "layers",
+      "intro": "Yapınızın kat planlarını, kesitlerini ve cephelerini çiziyoruz.",
+      "detail": "Yerleşime karar verdikten sonra odaların ölçülerini, kapı ve pencere yerlerini, merdivenleri ve katlar arasındaki bağlantıları çizime işliyoruz. Hangi çizimlere ihtiyaç olduğunu ve teslim edilecek dosyaları işe başlarken sizinle belirliyoruz.",
+      "question": "Elimde bir taslak varsa onun üzerinden çalışabilir miyiz?",
+      "answer": "Evet. Mevcut planı birlikte inceleyip hangi kararların verildiğini, hangi alanların yeniden ele alınacağını ve eksik çizimleri belirleyebiliriz."
+    },
+    {
+      "id": "gorsellestirme",
+      "name": "3D Görselleştirme",
+      "icon": "cube",
+      "intro": "Evinizi veya ofisinizi seçtiğiniz malzemelerle üç boyutlu görün.",
+      "detail": "Cephede taş mı yoksa sıva mı kullanacağınıza karar verirken iki seçeneği aynı açıdan görebilirsiniz. İç mekânda ise mobilyaların yerleşimini, pencere boyutlarını ve ışığın odaya nereden girdiğini model üzerinde inceleyebilirsiniz.",
+      "question": "Sadece üç boyutlu görsel isteyebilir miyim?",
+      "answer": "Evet. Mevcut çizimlerinizi ve görmek istediğiniz alanları paylaşın. İç mekân, dış cephe veya her ikisi için hangi açıların hazırlanacağını birlikte seçelim."
+    },
+    {
+      "id": "danismanlik",
+      "name": "Mimari Danışmanlık",
+      "icon": "plan",
+      "intro": "Ofislere ve müteahhitlere tasarım ve çizim desteği veriyoruz.",
+      "detail": "Bir katta farklı daire tiplerinin nasıl yerleşebileceğini ya da bir ofis katının ayrı birimlere nasıl bölünebileceğini mevcut çizimler üzerinden değerlendiriyoruz. Ekibinizin ihtiyaç duyduğu tasarım ve çizim işlerini belirleyip görev paylaşımını netleştiriyoruz.",
+      "question": "Projenin yalnızca bir aşaması için destek alabilir miyiz?",
+      "answer": "Evet. Üzerinde çalıştığınız çizimleri, çözmek istediğiniz konuyu ve teslim takviminizi paylaşın. Gerekli desteğin kapsamını birlikte belirleyelim."
+    }
+  ]
+}

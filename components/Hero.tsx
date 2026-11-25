@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { frameUrl, heroMotion as scene, stages } from "@/content/hero-motion";
 import { createHeroPainter, decodeHeroImage, heroFrameAt } from "@/lib/hero-playback";
+import { withBase } from "@/lib/base-path";
 
 const last = stages.length - 1;
 const [compact, large] = scene.variants;
@@ -85,10 +86,10 @@ export function HeroArchitectureAnimation() {
         canvas.hidden = true;
         poster.style.visibility = "";
         // The picture source handles reduced motion even before hydration.
-        poster.src = motion.matches ? "/hero/opening.webp" : frameUrl(last, compact);
+        poster.src = motion.matches ? withBase("/hero/opening.webp") : frameUrl(last, compact);
         return;
       }
-      poster.src = "/hero/opening.webp";
+      poster.src = withBase("/hero/opening.webp");
       if (!inView || document.hidden) {
         stop();
         return;
@@ -127,7 +128,7 @@ export function HeroArchitectureAnimation() {
       aria-label="Kavramsal bir mimari çalışmanın müşteri karakaleminden beyaz modele ve ışıklandırılmış son görsele dönüşümü.">
       <picture>
         <source media="(prefers-reduced-motion: reduce), (scripting: none)" srcSet={finalSources} sizes={sizes} />
-        <Image ref={posterRef} src="/hero/opening.webp" width={scene.width} height={scene.height}
+        <Image ref={posterRef} src={withBase("/hero/opening.webp")} width={scene.width} height={scene.height}
           alt="" unoptimized loading="eager" fetchPriority="high" />
       </picture>
       <canvas ref={canvasRef} aria-hidden="true" hidden />

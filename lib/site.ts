@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { studio } from "@/content/studio";
-import { demoMode } from "./catalog";
+import { demoMode } from "./demo";
 
 const origin = process.env.SITE_URL;
 export const siteUrl = origin ? new URL(origin).origin : undefined;

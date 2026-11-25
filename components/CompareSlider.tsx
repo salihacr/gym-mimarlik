@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon } from "./svg/Icon";
+import { withBase } from "@/lib/base-path";
 
 type Side = { src: string; alt: string; label: string };
 
@@ -76,11 +77,11 @@ export function CompareSlider({
         onPointerUp={() => (dragging.current = false)}
         onPointerCancel={() => (dragging.current = false)}
       >
-        <Image className="compare-after" src={after.src} alt={after.alt} fill sizes="(max-width: 980px) 100vw, 56vw" draggable={false} />
+        <Image className="compare-after" src={withBase(after.src)} alt={after.alt} fill sizes="(max-width: 980px) 100vw, 56vw" draggable={false} />
         <Image
           className="compare-before"
           key={before.src}
-          src={before.src}
+          src={withBase(before.src)}
           alt={before.alt}
           fill
           sizes="(max-width: 980px) 100vw, 56vw"

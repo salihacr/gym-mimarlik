@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "title": "İlk görüşme",
+      "subtitle": "Arsa ve ihtiyaçlar",
+      "body": "Arsanızın yerini, ne yapmak istediğinizi ve bütçenizi konuşuyoruz. Elinizde çizim varsa birlikte inceliyor, hangi hizmete ihtiyaç duyduğunuzu belirliyoruz."
+    },
+    {
+      "title": "Yerleşim seçenekleri",
+      "subtitle": "İlk planlar",
+      "body": "Oda düzenini, bina girişini ve ortak alanları ilk plan üzerinde gösteriyoruz. Beğendiğiniz ve değiştirmek istediğiniz yerleri birlikte işaretliyoruz."
+    },
+    {
+      "title": "Çizim ve modelleme",
+      "subtitle": "Projenin ayrıntıları",
+      "body": "Seçtiğiniz planın ölçülerini ve dış görünüşünü netleştiriyoruz. Çalışma kapsamına göre iç mekânı veya cepheyi üç boyutlu olarak da gösteriyoruz."
+    },
+    {
+      "title": "Proje teslimi",
+      "subtitle": "Çizimler ve dosyalar",
+      "body": "Başlangıçta kararlaştırdığımız çizim ve görselleri teslim ediyoruz. Planı sizinle birlikte gözden geçiriyor, dosyalarla ilgili sorularınızı yanıtlıyoruz."
+    }
+  ]
+}

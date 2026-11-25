@@ -5,6 +5,7 @@ import { metadata as pageMeta } from "@/lib/site";
 import { Crumbs, Eyebrow, ContactCTA, Action } from "@/components/Shared";
 import { ProjectCard } from "@/components/Projects";
 import { Gallery, Comparison } from "@/components/Gallery";
+import { withBase } from "@/lib/base-path";
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
   return catalog().map(({ slug }) => ({ slug }));
@@ -59,7 +60,7 @@ export default async function Project({ params }: Props) {
         {p.cover && (
           <figure className="detail-cover">
             <Image
-              src={p.cover.src}
+              src={withBase(p.cover.src)}
               alt={p.cover.alt}
               width={1536}
               height={1024}

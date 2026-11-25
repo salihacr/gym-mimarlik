@@ -1,10 +1,10 @@
-export const serviceOptions = [
-  "tasarim",
-  "projelendirme",
-  "gorsellestirme",
-  "danismanlik",
+import servicesData from "../content/site/hizmetler.json" with { type: "json" };
+
+// Service ids come from the CMS-managed list; "belirsiz" lets visitors leave it open.
+export const serviceOptions: readonly string[] = [
+  ...servicesData.items.map((s) => s.id),
   "belirsiz",
-] as const;
+];
 export interface Inquiry {
   name: string;
   email: string;

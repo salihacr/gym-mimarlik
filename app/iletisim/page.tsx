@@ -5,18 +5,13 @@ import {
   contactEnabled,
   metadata as pageMeta,
 } from "@/lib/site";
-import { services, studio } from "@/content/studio";
+import { studio } from "@/content/studio";
 export const metadata = pageMeta(
   "/iletisim",
   "İletişim ve Proje Görüşmesi",
   "Mimari tasarım, projelendirme veya 3D görselleştirme için ihtiyaçlarınızı ve proje konumunuzu GYM Mimarlık görüşmesine hazırlayın.",
 );
-export default async function Contact({
-  searchParams,
-}: {
-  searchParams: Promise<{ hizmet?: string }>;
-}) {
-  const selected = (await searchParams).hizmet;
+export default function Contact() {
   const email = process.env.STUDIO_EMAIL,
     phone = process.env.STUDIO_PHONE,
     whatsapp = process.env.STUDIO_WHATSAPP;
@@ -54,7 +49,6 @@ export default async function Contact({
         <ContactForm
           enabled={contactEnabled}
           notice={approvedNotice}
-          initialService={services.find((s) => s.id === selected)?.id ?? ""}
         />
       </div>
     </>

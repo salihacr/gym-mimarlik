@@ -1,0 +1,54 @@
+# Builds the static site and publishes it to GitHub Pages on every push to master.
+# Repo → Settings → Pages → Source: "GitHub Actions".
+name: GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Build
+        run: npm run build
+        env:
+          # Project site lives at https://<user>.github.io/<repo>/. Use "" with a custom domain.
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Preview: show the demo portfolio (pages stay noindex while demos are on).
+          SHOW_DEMO: "true"
+          # Contact form: GitHub Pages cannot run functions/, so the form offers a downloadable summary.
+          STUDIO_EMAIL: ${{ vars.STUDIO_EMAIL }}
+          STUDIO_PHONE: ${{ vars.STUDIO_PHONE }}
+          STUDIO_WHATSAPP: ${{ vars.STUDIO_WHATSAPP }}
+      - run: touch out/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import type { Media } from "@/content/model";
 import { Icon } from "./svg/Icon";
+import { withBase } from "@/lib/base-path";
 export function Gallery({ images, title }: { images: Media[]; title: string }) {
   const [index, setIndex] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -23,7 +24,7 @@ export function Gallery({ images, title }: { images: Media[]; title: string }) {
             }}
           >
             <Image
-              src={m.src}
+              src={withBase(m.src)}
               alt={m.alt}
               width={1100}
               height={740}
@@ -55,7 +56,7 @@ export function Gallery({ images, title }: { images: Media[]; title: string }) {
           <Icon name="close" />
         </button>
         <Image
-          src={image.src}
+          src={withBase(image.src)}
           alt={image.alt}
           width={1400}
           height={920}
@@ -92,9 +93,9 @@ export function Comparison({
     <section className="gallery-section" id="karsilastirma">
       <h2>Çizimden üç boyuta.</h2>
       <div className="compare">
-        <Image src={render.src} alt={render.alt} fill sizes="90vw" />
+        <Image src={withBase(render.src)} alt={render.alt} fill sizes="90vw" />
         <Image
-          src={drawing.src}
+          src={withBase(drawing.src)}
           alt={drawing.alt}
           fill
           sizes="90vw"

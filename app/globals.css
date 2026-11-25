@@ -378,7 +378,7 @@ p {
   overflow: hidden;
   /* Follow the outer roofline so the paper merges into the page. */
   mask-image:
-    url("/hero/silhouette.svg"),
+    url("../public/hero/silhouette.svg"),
     linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
     linear-gradient(to bottom, transparent, #000 9%, #000 92%, transparent);
   mask-size: 100% 100%;

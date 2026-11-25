@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { navigation } from "@/content/studio";
 import { catalog } from "@/lib/catalog";
 import { siteUrl, indexable } from "@/lib/site";
+export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!indexable || !siteUrl) return [];
   return [

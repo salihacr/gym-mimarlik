@@ -1,0 +1,199 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+# GYM Mimarlık yönetim paneli (Sveltia CMS). Panel: https://<alan-adi>/admin/
+# Her "Kaydet" işlemi GitHub'a bir commit atar; Cloudflare Pages siteyi 1-2 dakikada yeniden yayınlar.
+
+backend:
+  name: github
+  repo: salihacr/gym-mimarlik
+  branch: master
+  # Cloudflare'e kurulan sveltia-cms-auth Worker adresi (KURULUM-CMS.md, adım 2).
+  base_url: https://sveltia-cms-auth.HESAP-ADINIZ.workers.dev
+  commit_messages:
+    create: "İçerik: {{collection}} / {{slug}} eklendi"
+    update: "İçerik: {{collection}} / {{slug}} güncellendi"
+    delete: "İçerik: {{collection}} / {{slug}} silindi"
+    uploadMedia: "Görsel: {{path}} yüklendi"
+    deleteMedia: "Görsel: {{path}} silindi"
+
+
+media_folder: public/uploads
+public_folder: /uploads
+
+# Yüklenen fotoğraflar tarayıcıda küçültülüp WebP'ye çevrilir; 10 MB'lık render siteyi yavaşlatmaz.
+media_libraries:
+  default:
+    config:
+      max_file_size: 25000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2400
+          height: 2400
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: projeler
+    label: Projeler
+    label_singular: Proje
+    description: Portföydeki projeler. Yalnızca "Yayında" olanlar sitede görünür.
+    folder: content/projeler
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: "{{title}}"
+    identifier_field: title
+    summary: "{{title}} · {{category}} · {{publication}}"
+    sortable_fields: [title, year, order]
+    media_folder: /public/uploads/projeler
+    public_folder: /uploads/projeler
+    fields:
+      - { name: title, label: Proje adı, widget: string }
+      - name: publication
+        label: Yayın durumu
+        widget: select
+        default: draft
+        options:
+          - { label: "Taslak (sitede görünmez)", value: draft }
+          - { label: "Yayında", value: published }
+      - name: category
+        label: Kategori
+        widget: select
+        options: [Konut, Villa, Plaza / Ofis, İç Mekân]
+      - { name: location, label: Konum, widget: string, required: false, hint: "Örn. Darıca, Kocaeli" }
+      - { name: year, label: Yıl, widget: number, value_type: int, required: false, min: 2000, max: 2100 }
+      - name: status
+        label: Proje durumu
+        widget: select
+        required: false
+        hint: '"Tamamlandı" seçilen yayındaki projeler ana sayfada öne çıkar.'
+        options: [Tamamlandı, Uygulamada, Proje aşamasında]
+      - { name: order, label: Sıralama, widget: number, value_type: int, required: false, default: 0, hint: "Küçük sayı önce gelir. Boş bırakırsanız yeni yıllar önce gelir." }
+      - { name: summary, label: Kısa özet, widget: text, required: false, hint: "Kartlarda ve arama motorlarında görünen 1-2 cümle." }
+      - { name: approach, label: Tasarım yaklaşımı, widget: text, required: false }
+      - { name: solution, label: Mimari çözüm, widget: text, required: false }
+      - name: cover
+        label: Kapak görseli
+        widget: object
+        required: false
+        fields: &media_fields
+          - { name: src, label: Görsel, widget: image }
+          - { name: alt, label: "Görsel açıklaması (görme engelliler ve Google için)", widget: string }
+          - { name: caption, label: Alt yazı, widget: string, required: false }
+      - name: gallery
+        label: Görsel galeri
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        fields: *media_fields
+      - name: drawings
+        label: Planlar ve çizimler
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        fields: *media_fields
+      - name: renders
+        label: 3D görseller
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        fields: *media_fields
+      - name: comparison
+        label: Çizim / render karşılaştırması
+        widget: object
+        required: false
+        collapsed: true
+        hint: Aynı açıdan bir çizim ve bir render yükleyin; sayfada kaydırmalı karşılaştırma olarak görünür.
+        fields:
+          - { name: drawing, label: Çizim, widget: object, fields: *media_fields }
+          - { name: render, label: Render, widget: object, fields: *media_fields }
+      - name: scope
+        label: Hizmet kapsamı
+        widget: select
+        multiple: true
+        required: false
+        options: [Mimari Tasarım, Mimari Projelendirme, 3D Görselleştirme, Mimari Danışmanlık]
+      - name: seo
+        label: Arama motoru ayarları
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: title, label: Sayfa başlığı, widget: string, required: false }
+          - { name: description, label: Açıklama, widget: text, required: false }
+
+  - name: site
+    label: Site İçeriği
+    description: Hizmetler, stüdyo bilgileri ve çalışma süreci.
+    files:
+      - name: hizmetler
+        label: Hizmetler
+        file: content/site/hizmetler.json
+        format: json
+        fields:
+          - name: items
+            label: Hizmetler
+            label_singular: Hizmet
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: Hizmet adı, widget: string }
+              - name: id
+                label: Bağlantı kimliği
+                widget: string
+                pattern: ['^[a-z0-9-]+$', "Sadece küçük harf, rakam ve tire"]
+                hint: "Adres ve iletişim formu bunu kullanır (örn. tasarim). Mevcut hizmetlerde değiştirmeyin."
+              - name: icon
+                label: Simge
+                widget: select
+                options:
+                  - { label: Ev, value: house }
+                  - { label: Katmanlar, value: layers }
+                  - { label: Küp (3D), value: cube }
+                  - { label: Plan, value: plan }
+              - { name: intro, label: Kısa tanıtım, widget: text }
+              - { name: detail, label: Detaylı açıklama, widget: text }
+              - { name: question, label: Sık sorulan soru, widget: string }
+              - { name: answer, label: Cevap, widget: text }
+      - name: studyo
+        label: Stüdyo Bilgileri
+        file: content/site/studyo.json
+        format: json
+        fields:
+          - { name: name, label: Stüdyo adı, widget: string }
+          - { name: founder, label: Kurucu, widget: string }
+          - { name: experience, label: Deneyim, widget: string }
+          - { name: biography, label: Biyografi paragrafları, label_singular: Paragraf, widget: list, field: { name: paragraph, label: Paragraf, widget: text } }
+          - { name: regions, label: Hizmet bölgeleri, label_singular: Bölge, widget: list, field: { name: region, label: Bölge, widget: string } }
+      - name: surec
+        label: Çalışma Süreci
+        file: content/site/surec.json
+        format: json
+        fields:
+          - name: items
+            label: Aşamalar
+            label_singular: Aşama
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Başlık, widget: string }
+              - { name: subtitle, label: Alt başlık, widget: string }
+              - { name: body, label: Açıklama, widget: text }
+      - name: proje-turleri
+        label: Proje Türleri
+        file: content/site/proje-turleri.json
+        format: json
+        fields:
+          - name: items
+            label: Proje türleri
+            label_singular: Proje türü
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Başlık, widget: string }
+              - { name: description, label: Açıklama, widget: text }

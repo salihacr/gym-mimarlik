@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "title": "Konut ve apartman",
+      "description": "Daireleri arsaya nasıl yerleştirebiliriz? Bina girişini, merdiveni ve asansörü birlikte çözerken her dairenin aldığı ışığı ve odaların kullanımını inceliyoruz."
+    },
+    {
+      "title": "Villa ve müstakil ev",
+      "description": "Evinizi ailenizin alışkanlıklarına göre planlıyoruz. Kaç odaya ihtiyaç duyduğunuz, mutfaktan bahçeye nasıl çıkmak istediğiniz ve misafirlerinizi nerede ağırladığınız çizime yön veriyor."
+    },
+    {
+      "title": "Plaza ve ofis",
+      "description": "Çalışanların, ziyaretçilerin ve farklı firmaların aynı binayı nasıl kullanacağını ele alıyoruz. Ofis katlarının bölünebilmesi, girişten asansöre ulaşım ve ortak alanlar planın bir parçası."
+    }
+  ]
+}
