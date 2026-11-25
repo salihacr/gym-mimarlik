@@ -8,6 +8,7 @@ import {
 } from "react";
 import Script from "next/script";
 import { services } from "@/content/studio";
+import { withBase } from "@/lib/base-path";
 import { parseInquiry } from "@/lib/inquiry";
 import { Icon } from "./svg/Icon";
 // Optional Cloudflare Turnstile spam check; set the site key at build time.
@@ -75,7 +76,7 @@ export function ContactForm({
     setBusy(true);
     setMessage("");
     try {
-      const r = await fetch("/api/iletisim", {
+      const r = await fetch(withBase("/api/iletisim"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

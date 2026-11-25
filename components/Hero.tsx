@@ -69,7 +69,7 @@ export function HeroArchitectureAnimation() {
       try {
         const [frames, atlas] = await Promise.all([
           Promise.all(stages.map((_, index) => decodeHeroImage(frameUrl(index, sourceWidth)))),
-          decodeHeroImage("/hero/reveal.png"),
+          decodeHeroImage(withBase("/hero/reveal.png")),
         ]);
         if (disposed) return;
         paint = createHeroPainter(canvas, frames, atlas);
